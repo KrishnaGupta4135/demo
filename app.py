@@ -106,7 +106,7 @@ def load_and_store_book(pdf_path: str, raw_collection_name: str, _embeddings_obj
 
     # split text
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000, chunk_overlap=200, add_start_index=True
+        chunk_size=500, chunk_overlap=50, separators=["\n\n", "\n", ".", "!", "?", " "], add_start_index=True
     )
     all_splits = text_splitter.split_documents(docs)
 
