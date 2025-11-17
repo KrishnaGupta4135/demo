@@ -18,7 +18,7 @@ from langchain.agents.middleware import dynamic_prompt, ModelRequest
 st.set_page_config(page_title="📘 NCERT Teacher Assistant", layout="wide")
 
 # NOTE: store your real key securely (do NOT commit to source control)
-os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "AIzaSyDBxeWsg0PNU6oshQegElRrRjcT06L_9_w")
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "AIzaSyAOkNS8tJxmodhhyf6NTDQJ7S3Fu07XyGg")
 
 # ensure directories exist
 UPLOAD_DIR = "uploaded_pdfs"
@@ -106,7 +106,7 @@ def load_and_store_book(pdf_path: str, raw_collection_name: str, _embeddings_obj
 
     # split text
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500, chunk_overlap=50, separators=["\n\n", "\n", ".", "!", "?", " "], add_start_index=True
+        chunk_size=1000, chunk_overlap=200,  add_start_index=True
     )
     all_splits = text_splitter.split_documents(docs)
 
@@ -219,7 +219,7 @@ if selected_pdf:
         if mode == "qa":
             # Add a small intro line and spacing for clarity
             prompt = (
-                f"Answer the following question clearly and accurately based only on the uploaded NCERT content.\n\n"
+                f"Answer the following question clearly and accurately based only on the uploaded NCERT content.\n\n{user_query}\n\n"
 
             )
         elif mode == "lesson_plan":
